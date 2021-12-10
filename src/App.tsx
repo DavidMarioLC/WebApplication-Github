@@ -1,25 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import { light, dark, GlobalStyle } from './theme/ThemeConfig';
+import { ThemeProvider } from 'styled-components';
+import { Layout, Main, Aside, Wrapper } from './components/common';
+import Header from './components/Header';
+import TabNavigation from './components/TabNavigation';
+import Profile from './components/Profile';
+import Search from './components/Search';
+import SearchNotFound from './components/SearchNotFound';
+import Repositories from './components/Repositories';
+import { useTheme } from './hooks/useTheme';
 function App() {
+  const { theme, toggleTheme } = useTheme();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme === 'light' ? light : dark}>
+      <GlobalStyle />
+      <Header theme={theme} toggleTheme={toggleTheme} />
+      <Wrapper>
+        <Layout>
+          <Aside>
+            <Profile />
+          </Aside>
+          <Main>
+            <TabNavigation />
+            <Search />
+            {/* <SearchNotFound /> */}
+            <Repositories />
+          </Main>
+        </Layout>
+      </Wrapper>
+    </ThemeProvider>
   );
 }
 
