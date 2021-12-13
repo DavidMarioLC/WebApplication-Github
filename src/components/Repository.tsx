@@ -2,11 +2,14 @@ import styled from 'styled-components';
 import { Button } from './common';
 import { GoPrimitiveDot } from 'react-icons/go';
 import { FiStar } from 'react-icons/fi';
+
 const Repository = () => {
   return (
     <StyledRepository>
       <RepositoryContent>
-        <Name>MobileApplication-WalletApp</Name>
+        <Title>
+          <Name href='!#'> MobileApplication-WalletApp</Name> <Tag>Public</Tag>
+        </Title>
         <Description>
           Lleva el control total de tus finanzas desde la palma de tu mano.
           Darte cuenta de los gastos que realizas te ayudara a pensar 2 veces
@@ -52,10 +55,30 @@ const RepositoryContent = styled.div`
   gap: 1rem;
 `;
 
-const Name = styled.h3`
+const Title = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+`;
+
+const Name = styled.a`
   font-size: 1.5rem;
   line-height: 1.5rem;
+  text-decoration: none;
+  font-weight: 600;
   color: ${({ theme }) => theme.color.link};
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const Tag = styled.span`
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 4px 7px;
+  border-radius: 2rem;
+  color: ${({ theme }) => theme.color.text};
+  border: 1px solid ${({ theme }) => theme.color.border};
 `;
 
 const Description = styled.p`
