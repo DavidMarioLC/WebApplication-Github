@@ -5,11 +5,15 @@ import Header from './components/Header';
 import TabNavigation from './components/TabNavigation';
 import Profile from './components/Profile';
 import Search from './components/Search';
-import SearchNotFound from './components/SearchNotFound';
 import Repositories from './components/Repositories';
+import SearchNotFound from './components/SearchNotFound';
 import { useTheme } from './hooks/useTheme';
+import { useUser } from './hooks/useUser';
+
 function App() {
-  const { theme, toggleTheme } = useTheme();
+  const [theme, toggleTheme] = useTheme();
+  const [user, repositories] = useUser();
+
   return (
     <ThemeProvider theme={theme === 'light' ? light : dark}>
       <GlobalStyle />
