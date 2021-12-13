@@ -8,7 +8,7 @@ type Tprops = {
   theme: string;
   toggleTheme: () => void;
 };
-const Header = ({ toggleTheme, theme }: Tprops) => {
+const Header = ({ theme, toggleTheme }: Tprops) => {
   return (
     <StyledHeader>
       <Wrapper>
