@@ -6,30 +6,38 @@ import TabNavigation from './components/TabNavigation';
 import Profile from './components/Profile';
 import Search from './components/Search';
 import Repositories from './components/Repositories';
-import SearchNotFound from './components/SearchNotFound';
+// import SearchNotFound from './components/SearchNotFound';
 import { useTheme } from './hooks/useTheme';
 import { useUser } from './hooks/useUser';
+import { useParams } from 'react-router-dom';
+import NotFound from './components/NotFound';
 
 function App() {
+  const { username } = useParams();
   const [theme, toggleTheme] = useTheme();
-  const [user, repositories] = useUser();
+  const [userExist, user, repositories] = useUser(username || 'davidmariolc');
+  const totalRepositories = user.public_repos;
 
   return (
     <ThemeProvider theme={theme === 'light' ? light : dark}>
       <GlobalStyle />
       <Header theme={theme} toggleTheme={toggleTheme} />
       <Wrapper>
-        <Layout>
-          <Aside>
-            <Profile />
-          </Aside>
-          <Main>
-            <TabNavigation />
-            <Search />
-            {/* <SearchNotFound /> */}
-            <Repositories />
-          </Main>
-        </Layout>
+        {userExist ? (
+          <Layout>
+            <Aside>
+              <Profile user={user} />
+            </Aside>
+            <Main>
+              <TabNavigation totalRepositories={totalRepositories} />
+              <Search />
+              {/* <SearchNotFound /> */}
+              <Repositories repositories={repositories} />
+            </Main>
+          </Layout>
+        ) : (
+          <NotFound />
+        )}
       </Wrapper>
     </ThemeProvider>
   );
