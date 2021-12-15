@@ -29,8 +29,8 @@ const Repository = ({ repository }: Props) => {
         </Title>
         <Description>{description}</Description>
         <ListBadges>
-          {topics.map((topic) => (
-            <Badge>{topic}</Badge>
+          {topics.map((topic, idx) => (
+            <Badge key={idx}>{topic}</Badge>
           ))}
         </ListBadges>
         <TechnologyAndDate>
@@ -110,6 +110,7 @@ const Description = styled.p`
 
 const ListBadges = styled.ul`
   display: flex;
+  flex-wrap: wrap;
   gap: 0.2rem;
 `;
 
