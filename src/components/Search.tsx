@@ -1,9 +1,18 @@
 import styled from 'styled-components';
 
-const Search = () => {
+type Props = {
+  searchValue: string;
+  changeSearch: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+const Search = ({ searchValue, changeSearch }: Props) => {
   return (
     <StyledSearch>
-      <SearchInput placeholder='Find a repository...' />
+      <SearchInput
+        value={searchValue}
+        onChange={changeSearch}
+        placeholder='Find a repository...'
+      />
       <Actions>
         <button>Type</button>
         <button>Language</button>
