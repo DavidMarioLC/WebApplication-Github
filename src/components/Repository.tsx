@@ -2,30 +2,46 @@ import styled from 'styled-components';
 import { Button } from './common';
 import { GoPrimitiveDot } from 'react-icons/go';
 import { FiStar } from 'react-icons/fi';
+import { TRepository } from '../types/index';
+import { formatDate } from '../utils/formatDate';
+type Props = {
+  repository: TRepository;
+};
 
-const Repository = () => {
+const Repository = ({ repository }: Props) => {
+  const {
+    name,
+    visibility,
+    html_url,
+    description,
+    language,
+    topics,
+    updated_at,
+  } = repository;
   return (
     <StyledRepository>
       <RepositoryContent>
         <Title>
-          <Name href='!#'> MobileApplication-WalletApp</Name> <Tag>Public</Tag>
+          <Name href={html_url} target='_blank'>
+            {name}
+          </Name>
+          <Tag>{visibility}</Tag>
         </Title>
-        <Description>
-          Lleva el control total de tus finanzas desde la palma de tu mano.
-          Darte cuenta de los gastos que realizas te ayudara a pensar 2 veces
-          antes de sacar la tarjeta para pagar.
-        </Description>
+        <Description>{description}</Description>
         <ListBadges>
-          <Badge>react</Badge>
-          <Badge>typescript</Badge>
-          <Badge>firebase</Badge>
+          {topics.map((topic) => (
+            <Badge>{topic}</Badge>
+          ))}
         </ListBadges>
         <TechnologyAndDate>
-          <Technology>
-            <TechnologyDot language={'Html'} />
-            Typescript
-          </Technology>
-          <Date>Updated 4 days ago</Date>
+          {language ? (
+            <Technology>
+              <TechnologyDot language={language} />
+              {language}
+            </Technology>
+          ) : null}
+
+          <Date>{formatDate(updated_at)}</Date>
         </TechnologyAndDate>
       </RepositoryContent>
       <Details>
@@ -43,6 +59,7 @@ const StyledRepository = styled.article`
   display: flex;
   gap: 1rem;
   flex-direction: column;
+  justify-content: space-between;
   border-bottom: 1px solid ${({ theme }) => theme.color.border};
   @media screen and (min-width: 768px) {
     flex-direction: row;
@@ -52,6 +69,7 @@ const StyledRepository = styled.article`
 const RepositoryContent = styled.div`
   display: flex;
   flex-direction: column;
+
   gap: 1rem;
 `;
 
@@ -121,9 +139,9 @@ const getColorLanguage = (language: string): string => {
     [key: string]: string;
   }
   const color: Icolor = {
-    Typescript: '#2b7489',
+    TypeScript: '#2b7489',
     JavaScript: '#f1e05a',
-    Html: '#e34c26',
+    HTML: '#e34c26',
     CSS: '#563d7c',
   };
   return color[language];
