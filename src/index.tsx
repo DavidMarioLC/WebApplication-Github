@@ -2,11 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+// import NotFound from './components/NotFound';
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <Routes>
+        <Route path=':username' element={<App />} />
+        <Route
+          path='*'
+          element={<Navigate to='/davidmariolc' replace={true} />}
+        />
+      </Routes>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
