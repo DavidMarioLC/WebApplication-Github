@@ -8,7 +8,7 @@ const Repositories = ({ repositories }: Props) => {
   return (
     <StyledRepositories>
       {repositories.map((repository) => (
-        <Repository repository={repository} />
+        <Repository key={repository.id} repository={repository} />
       ))}
     </StyledRepositories>
   );
