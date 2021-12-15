@@ -1,12 +1,18 @@
 import styled from 'styled-components';
 import { IoMdCloseCircle } from 'react-icons/io';
-const SearchNotFound = () => {
+
+type Props = {
+  word: string;
+  result: number;
+};
+
+const SearchNotFound = ({ word, result }: Props) => {
   return (
     <StyledSearchNotFound>
       <SearchContent>
         <SearchNotFoundParagraph>
-          <Results>0</Results> results for repositories matching
-          <WordSearch> asdasdasfdf</WordSearch> sorted by last updated
+          <Results>{result}</Results> results for repositories matching
+          <WordSearch> {word}</WordSearch> sorted by last updated
         </SearchNotFoundParagraph>
         <ButtonClear>
           <IoMdCloseCircle />
@@ -20,7 +26,9 @@ const SearchNotFound = () => {
   );
 };
 
-const StyledSearchNotFound = styled.section``;
+const StyledSearchNotFound = styled.section`
+  color: ${({ theme }) => theme.color.textPrincipal};
+`;
 
 const SearchContent = styled.div`
   padding: 1.5rem 0;
