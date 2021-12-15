@@ -3,57 +3,90 @@ import { Button } from './common';
 import { FaRegBuilding } from 'react-icons/fa';
 import { FiMapPin } from 'react-icons/fi';
 import { BsLink45Deg, BsPeople } from 'react-icons/bs';
-import { AiOutlineTwitter, AiOutlineStar } from 'react-icons/ai';
+import { AiOutlineTwitter } from 'react-icons/ai';
+import { TUser } from '../types/index';
+import { formatStars } from '../utils/formatStars';
 
-const Profile = () => {
+type Props = {
+  user: TUser;
+};
+const Profile = ({ user }: Props) => {
+  const {
+    avatar_url,
+    name,
+    login,
+    bio,
+    followers,
+    following,
+    company,
+    location,
+    blog,
+    twitter_username,
+  } = user;
+
+  const deleteAtOfCompany = (company: string) => company.replace('@', '');
+
   return (
     <StyledProfile>
       <ProfileContent>
         <UserWrapper>
           <PictureWrapper>
-            <UserPicture src='https://avatars.githubusercontent.com/u/1500684?v=4' />
+            <UserPicture src={avatar_url} />
           </PictureWrapper>
           <ContentWrapper>
-            <UserName>Kent C. Dodds</UserName>
-            <UserNickName>kentcdodds</UserNickName>
+            <UserName>{name}</UserName>
+            <UserNickName>{login}</UserNickName>
           </ContentWrapper>
         </UserWrapper>
         <ButtonFollow>Follow</ButtonFollow>
-        <Bio>
-          Improving the world with quality software · Husband, Father,
-          Latter-day Saint, Teacher, OSS · @remix-run · TestingJavaScript.com ·
-          EpicReact.Dev · Be Kind
-        </Bio>
+        {bio ? <Bio>{bio}</Bio> : null}
         <FollowerAndFollowing>
           <Followers>
             <BsPeople />
-            <Bold> 22.2k</Bold> Followers
+            <Bold> {formatStars(followers)}</Bold> Followers
           </Followers>
           <Followings>
-            <Bold>42</Bold> Following
+            <Bold>{formatStars(following)}</Bold> Following
           </Followings>
-          <Stars>
-            <AiOutlineStar />
-            <Bold>1.2k </Bold>
-          </Stars>
         </FollowerAndFollowing>
         <Detail>
-          <DetailItem>
-            <FaRegBuilding />
-            <DetailLink href='!#'>@remix-run</DetailLink>
-          </DetailItem>
-          <DetailItem>
-            <FiMapPin />
-            Salt Lake City, Utah, USA
-          </DetailItem>
-          <DetailItem>
-            <BsLink45Deg />
-            <DetailLink href='!#'> https://kentcdodds.com</DetailLink>
-          </DetailItem>
-          <DetailItem>
-            <AiOutlineTwitter />
-            <DetailLink href='!#'>@kentcdodds</DetailLink>
-          </DetailItem>
+          {company ? (
+            <DetailItem>
+              <FaRegBuilding />
+              <DetailLink
+                href={`https://github.com/${deleteAtOfCompany(company)}`}
+                target='_blank'
+              >
+                {deleteAtOfCompany(company)}
+              </DetailLink>
+            </DetailItem>
+          ) : null}
+          {location ? (
+            <DetailItem>
+              <FiMapPin />
+              {location}
+            </DetailItem>
+          ) : null}
+
+          {blog ? (
+            <DetailItem>
+              <BsLink45Deg />
+              <DetailLink href={blog} target='_blank'>
+                {blog}
+              </DetailLink>
+            </DetailItem>
+          ) : null}
+          {twitter_username ? (
+            <DetailItem>
+              <AiOutlineTwitter />
+              <DetailLink
+                href={`https://twitter.com/${twitter_username}`}
+                target='_blank'
+              >
+                @{twitter_username}
+              </DetailLink>
+            </DetailItem>
+          ) : null}
         </Detail>
       </ProfileContent>
     </StyledProfile>
@@ -61,6 +94,7 @@ const Profile = () => {
 };
 
 const StyledProfile = styled.div``;
+
 const ProfileContent = styled.div`
   display: flex;
   flex-direction: column;
@@ -68,6 +102,7 @@ const ProfileContent = styled.div`
 `;
 
 const PictureWrapper = styled.figure`
+  width: 100%;
   border-radius: 50%;
   overflow: hidden;
   max-width: 20%;
@@ -131,12 +166,6 @@ const Followers = styled.li`
 `;
 
 const Followings = styled.li``;
-
-const Stars = styled.li`
-  display: flex;
-  align-items: center;
-  gap: 0.2rem;
-`;
 
 const Detail = styled.ul`
   display: flex;
