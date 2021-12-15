@@ -1,16 +1,15 @@
 import styled from 'styled-components';
 import Repository from './Repository';
-
-const Repositories = () => {
+import { TRepository } from '../types/index';
+type Props = {
+  repositories: TRepository[];
+};
+const Repositories = ({ repositories }: Props) => {
   return (
     <StyledRepositories>
-      <Repository />
-      <Repository />
-      <Repository />
-      <Repository />
-      <Repository />
-      <Repository />
-      <Repository />
+      {repositories.map((repository) => (
+        <Repository repository={repository} />
+      ))}
     </StyledRepositories>
   );
 };
