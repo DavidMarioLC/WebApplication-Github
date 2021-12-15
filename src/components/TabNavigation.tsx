@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 import { FiBookOpen, FiBook, FiBox, FiBriefcase } from 'react-icons/fi';
 
-const TabNavigation = () => {
+type Props = {
+  totalRepositories: number;
+};
+const TabNavigation = ({ totalRepositories }: Props) => {
   return (
     <StyledTabNavigation>
       <TabItem>
@@ -10,7 +13,7 @@ const TabNavigation = () => {
       </TabItem>
       <TabItem active={true}>
         <FiBook />
-        Repositories <TotalRepositories>45</TotalRepositories>
+        Repositories <TotalRepositories>{totalRepositories}</TotalRepositories>
       </TabItem>
       <TabItem>
         <FiBriefcase />
