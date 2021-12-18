@@ -1,11 +1,85 @@
 import styled from 'styled-components';
-
+import Select from './Select';
+import { useUser } from '../contexts/userContext';
 type Props = {
   searchValue: string;
   changeSearch: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
+const optionsType = [
+  {
+    label: 'All',
+    value: 'all',
+  },
+  {
+    label: 'Public',
+    value: 'public',
+  },
+  {
+    label: 'Private',
+    value: 'sources',
+  },
+  {
+    label: 'Forks',
+    value: 'forks',
+  },
+  {
+    label: 'Archived',
+    value: 'archived',
+  },
+  {
+    label: 'Mirrors',
+    value: 'mirrors',
+  },
+];
+
+const optionsLanguage = [
+  {
+    label: 'All',
+    value: 'all',
+  },
+  {
+    label: 'TypeScript',
+    value: 'typeScript',
+  },
+  {
+    label: 'JavaScript',
+    value: 'javascript',
+  },
+  {
+    label: 'HTML',
+    value: 'HTML',
+  },
+  {
+    label: 'CSS',
+    value: 'CSS',
+  },
+];
+
+const optionsSort = [
+  {
+    label: 'Last updated',
+    value: 'pushed',
+  },
+  {
+    label: 'Name',
+    value: 'full_name',
+  },
+  {
+    label: 'Stars',
+    value: 'Stars',
+  },
+];
+
 const Search = ({ searchValue, changeSearch }: Props) => {
+  const {
+    type,
+    language,
+    sort,
+    changeOptionType,
+    changeOptionLanguage,
+    changeOptionSort,
+  } = useUser();
   return (
     <StyledSearch>
       <SearchInput
@@ -14,9 +88,24 @@ const Search = ({ searchValue, changeSearch }: Props) => {
         placeholder='Find a repository...'
       />
       <Actions>
-        <button>Type</button>
-        <button>Language</button>
-        <button>Sort</button>
+        <Select
+          title='Type'
+          defaultOption={type}
+          options={optionsType}
+          changeOption={changeOptionType}
+        />
+        <Select
+          title='Language'
+          defaultOption={language}
+          options={optionsLanguage}
+          changeOption={changeOptionLanguage}
+        />
+        <Select
+          title='Sort'
+          defaultOption={sort}
+          options={optionsSort}
+          changeOption={changeOptionSort}
+        />
       </Actions>
     </StyledSearch>
   );
