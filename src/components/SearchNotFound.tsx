@@ -4,9 +4,11 @@ import { IoMdCloseCircle } from 'react-icons/io';
 type Props = {
   word: string;
   result: number;
+  username: string;
+  resetSearch: () => void;
 };
 
-const SearchNotFound = ({ word, result }: Props) => {
+const SearchNotFound = ({ word, result, username, resetSearch }: Props) => {
   return (
     <StyledSearchNotFound>
       <SearchContent>
@@ -14,13 +16,13 @@ const SearchNotFound = ({ word, result }: Props) => {
           <Results>{result}</Results> results for repositories matching
           <WordSearch> {word}</WordSearch> sorted by last updated
         </SearchNotFoundParagraph>
-        <ButtonClear>
+        <ButtonClear onClick={resetSearch}>
           <IoMdCloseCircle />
           Clear filter
         </ButtonClear>
       </SearchContent>
       <MessageNotFound>
-        DavidMarioLC doesn’t have any repositories that match.
+        {username} doesn’t have any repositories that match.
       </MessageNotFound>
     </StyledSearchNotFound>
   );
