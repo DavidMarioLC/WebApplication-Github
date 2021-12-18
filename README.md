@@ -4,7 +4,7 @@
 
 <h1 align="center">Github Clone</h1>
 <div align="center">
-<img width="600px"    src="https://raw.githubusercontent.com/DavidMarioLC/WebApplication-BlockMaster/main/preview.png" />
+<img width="600px"    src="https://raw.githubusercontent.com/DavidMarioLC/WebApplication-Github/main/preview.png" />
 </div>
 
 <p align="center">Maneja los repositorios de tus proyectos como todo un profesional utilizando GitList, la plataforma de desarrollo más grande y avanzada del mundo.</p>
