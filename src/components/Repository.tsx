@@ -75,6 +75,7 @@ const RepositoryContent = styled.div`
 
 const Title = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
   align-items: center;
 `;
@@ -101,6 +102,7 @@ const Tag = styled.span`
 
 const Description = styled.p`
   font-size: 1rem;
+  overflow-wrap: break-word;
   line-height: 1.5rem;
   color: ${({ theme }) => theme.color.text};
   @media screen and (min-width: 768px) {
@@ -155,9 +157,10 @@ const TechnologyDot = styled(GoPrimitiveDot)<{ language: string }>`
 
 const Date = styled.div``;
 const Details = styled.div``;
-
 const ButtonStar = styled(Button)`
   display: flex;
+  align-items: center;
+
   gap: 0.5rem;
 `;
 export default Repository;
