@@ -1,8 +1,12 @@
-export const fetchGithubApi = async (username: string): Promise<any> => {
+export const fetchGithubApi = async (
+  username?: string,
+  type?: string,
+  sort?: string
+): Promise<any> => {
   const API_URL: string = 'https://api.github.com/users';
   const [userResponse, repositoriesResponse] = await Promise.all([
     fetch(`${API_URL}/${username}`),
-    fetch(`${API_URL}/${username}/repos`),
+    fetch(`${API_URL}/${username}/repos?type=${type}&sort=${sort}`),
   ]);
 
   const userExist = userResponse.ok;
