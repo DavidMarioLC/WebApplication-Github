@@ -40,6 +40,7 @@ const StyledTabNavigation = styled.ul`
 
 const TabItem = styled.li<{ active?: Boolean }>`
   display: flex;
+  align-items: center;
   gap: 0.2rem;
   color: ${({ theme }) => theme.color.textPrincipal};
   padding: 2rem 0 1rem;
