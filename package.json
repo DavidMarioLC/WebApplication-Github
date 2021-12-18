@@ -1,5 +1,6 @@
 {
   "name": "github-clone",
+  "homepage": "http://davidmariolc.github.io/WebApplication-Github",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -12,6 +13,7 @@
     "@types/react-dom": "^17.0.11",
     "@types/styled-components": "^5.1.17",
     "dayjs": "^1.10.7",
+    "gh-pages": "^3.2.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
@@ -23,6 +25,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
