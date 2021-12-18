@@ -129,6 +129,7 @@ const UserWrapper = styled.div`
 
 const UserPicture = styled.img`
   width: 100%;
+  vertical-align: middle;
 `;
 
 const UserName = styled.h1`
