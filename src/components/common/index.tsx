@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
 export const Button = styled.button`
   cursor: pointer;
   text-align: center;
-  font-weight: bold;
+  font-weight: 600;
   background-color: ${({ theme }) => theme.color.button};
   border: 1px solid ${({ theme }) => theme.color.border};
   color: ${({ theme }) => theme.color.textPrincipal};
