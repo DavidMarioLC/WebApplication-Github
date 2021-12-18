@@ -18,8 +18,8 @@ const StyledNotFound = styled.div`
 `;
 
 const Image = styled.img`
-  max-width: 60%;
-  width: 100%;
+  // max-width: 80%;
+  width: 50vw;
 `;
 
 export default NotFound;
